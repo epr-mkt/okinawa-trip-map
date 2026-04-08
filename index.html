@@ -115,7 +115,7 @@ html, body { height: 100%; font-family: var(--font); background: var(--bg); over
 .legend-item { display: flex; align-items: center; gap: 4px; font-size: 0.62rem; color: var(--muted); }
 
 /* ── 지도 ── */
-#map { flex: 1; height: 100%; }
+#map { width: 100%; height: 100%; min-height: 400px; }
 
 /* 구글맵 InfoWindow 커스텀 */
 .iw-wrap { font-family: var(--font); min-width: 220px; max-width: 300px; }
@@ -165,7 +165,7 @@ html, body { height: 100%; font-family: var(--font); background: var(--bg); over
   :root { --panel: 100vw; }
   #panel { position: fixed; top: 0; left: 0; width: 100%; height: 55%; z-index: 200; transition: transform 0.3s; }
   #panel.hidden { transform: translateY(-100%); }
-  #map { position: fixed; bottom: 0; left: 0; width: 100%; height: 50%; }
+  #map { position: fixed; bottom: 0; left: 0; width: 100%; height: 50%; min-height: 300px; }
   #day-btns { top: auto; bottom: 70px; }
   #mob-toggle {
     display: flex; align-items: center; justify-content: center;
@@ -206,7 +206,7 @@ html, body { height: 100%; font-family: var(--font); background: var(--bg); over
   </div>
 
   <!-- ── 지도 ── -->
-  <div style="flex:1;position:relative;">
+  <div style="flex:1;position:relative;height:100%;">
     <div id="map"></div>
     <div id="day-btns">
       <button class="day-btn active" id="dbtn-all" style="background:var(--accent)" onclick="showDay('all',this)">전체</button>
