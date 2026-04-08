@@ -4,267 +4,173 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>🌺 오키나와 후발대 일정</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-/* ── Design Tokens (이피알마케팅 design-kit) ── */
 :root {
-  --color-bg: #f6f8fb;
-  --color-surface: #ffffff;
-  --color-border: #dddddd;
-  --color-border-light: #ececf2;
-  --color-text-primary: #1f2021;
-  --color-text-secondary: #525457;
-  --color-text-muted: #757575;
-  --color-accent: #5511bc;
-  --color-accent-bg: #f2ecfc;
-  --color-accent-light: #f6efff;
-  --shadow-card: 2px 4px 18px rgba(28,32,36,0.06);
-  --shadow-card-hover: 2px 4px 24px rgba(28,32,36,0.12);
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --font: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --day1: #5511bc;
-  --day2: #0077b6;
-  --day3: #e65100;
-  --day4: #2e7d32;
-  --panel-w: 360px;
+  --accent: #5511bc;
+  --accent-bg: #f2ecfc;
+  --accent-light: #f6efff;
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --border: #ececf2;
+  --text: #1f2021;
+  --muted: #757575;
+  --sub: #525457;
+  --shadow: 2px 4px 18px rgba(28,32,36,0.07);
+  --shadow-h: 2px 4px 24px rgba(28,32,36,0.14);
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
+  --font: 'Noto Sans KR', -apple-system, sans-serif;
+  --day1: #5511bc; --day2: #0077b6; --day3: #e65100; --day4: #2e7d32;
+  --panel: 360px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; font-family: var(--font); background: var(--color-bg); color: var(--color-text-primary); overflow: hidden; }
+html, body { height: 100%; font-family: var(--font); background: var(--bg); overflow: hidden; }
 
 /* ── 레이아웃 ── */
 #app { display: flex; height: 100vh; }
 
 /* ── 패널 ── */
 #panel {
-  width: var(--panel-w); min-width: var(--panel-w);
-  height: 100%; display: flex; flex-direction: column;
-  background: var(--color-surface);
-  border-right: 1px solid var(--color-border-light);
-  z-index: 100; box-shadow: var(--shadow-card);
+  width: var(--panel); min-width: var(--panel); height: 100%;
+  display: flex; flex-direction: column;
+  background: var(--surface); border-right: 1px solid var(--border);
+  z-index: 100; box-shadow: var(--shadow);
 }
 #panel-header {
-  background: linear-gradient(135deg, var(--color-accent) 0%, #7c3aed 100%);
-  color: white; padding: 18px 20px 14px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+  color: #fff; padding: 16px 20px 12px; flex-shrink: 0;
 }
-#panel-header h1 { font-size: 1rem; font-weight: 800; letter-spacing: -0.3px; }
-#panel-header p { font-size: 0.72rem; opacity: 0.8; margin-top: 3px; }
+#panel-header h1 { font-size: 0.95rem; font-weight: 800; letter-spacing: -0.3px; }
+#panel-header p  { font-size: 0.7rem; opacity: 0.82; margin-top: 3px; }
 
 /* DAY 탭 */
-#day-tabs {
-  display: flex; border-bottom: 1px solid var(--color-border-light);
-  flex-shrink: 0; background: var(--color-surface);
-}
+#day-tabs { display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0; }
 .day-tab {
-  flex: 1; padding: 10px 4px; text-align: center;
-  font-size: 0.68rem; font-weight: 700; color: var(--color-text-muted);
+  flex: 1; padding: 9px 4px; text-align: center;
+  font-size: 0.67rem; font-weight: 700; color: var(--muted);
   cursor: pointer; border-bottom: 3px solid transparent;
-  transition: all 0.2s; line-height: 1.4; font-family: var(--font);
+  transition: all 0.18s; line-height: 1.4; font-family: var(--font);
 }
-.day-tab:hover { background: var(--color-accent-light); color: var(--color-accent); }
-.day-tab.active[data-day="all"] { color: var(--color-text-primary); border-bottom-color: var(--color-text-primary); background: var(--color-bg); }
-.day-tab.active[data-day="1"] { color: var(--day1); border-bottom-color: var(--day1); background: var(--color-accent-light); }
-.day-tab.active[data-day="2"] { color: var(--day2); border-bottom-color: var(--day2); background: #e8f4fd; }
-.day-tab.active[data-day="3"] { color: var(--day3); border-bottom-color: var(--day3); background: #fff3e0; }
-.day-tab.active[data-day="4"] { color: var(--day4); border-bottom-color: var(--day4); background: #e8f5e9; }
+.day-tab:hover { background: var(--accent-light); color: var(--accent); }
+.day-tab.active[data-day="all"] { color: var(--text); border-bottom-color: var(--text); background: var(--bg); }
+.day-tab.active[data-day="1"]   { color: var(--day1); border-bottom-color: var(--day1); background: var(--accent-light); }
+.day-tab.active[data-day="2"]   { color: var(--day2); border-bottom-color: var(--day2); background: #e8f4fd; }
+.day-tab.active[data-day="3"]   { color: var(--day3); border-bottom-color: var(--day3); background: #fff3e0; }
+.day-tab.active[data-day="4"]   { color: var(--day4); border-bottom-color: var(--day4); background: #e8f5e9; }
 
 /* 장소 목록 */
-#place-list { flex: 1; overflow-y: auto; padding: 8px 0; }
+#place-list { flex: 1; overflow-y: auto; }
 #place-list::-webkit-scrollbar { width: 4px; }
-#place-list::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+#place-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-.day-group-header {
-  padding: 8px 16px 5px; font-size: 0.65rem; font-weight: 800;
-  text-transform: uppercase; letter-spacing: 0.8px;
-  background: var(--color-bg);
-  border-bottom: 1px solid var(--color-border-light);
-  border-top: 1px solid var(--color-border-light);
-  color: var(--color-text-muted);
-  display: flex; align-items: center; gap: 6px;
+.day-group-hdr {
+  padding: 7px 16px 5px; font-size: 0.63rem; font-weight: 800;
+  letter-spacing: 0.7px; text-transform: uppercase;
+  background: var(--bg); border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  color: var(--muted); display: flex; align-items: center; gap: 6px;
 }
 .day-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
 .place-item {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 10px 16px; cursor: pointer;
-  border-bottom: 1px solid var(--color-border-light);
-  transition: background 0.15s; position: relative;
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 9px 16px; cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.14s; position: relative;
 }
-.place-item:hover { background: var(--color-accent-light); }
-.place-item.active { background: var(--color-accent-bg); }
+.place-item:hover  { background: var(--accent-light); }
+.place-item.active { background: var(--accent-bg); }
 .place-item::before {
   content: ''; position: absolute;
-  left: 27px; top: 34px; bottom: -10px;
-  width: 2px; background: var(--color-border-light); z-index: 0;
+  left: 26px; top: 32px; bottom: -9px;
+  width: 2px; background: var(--border); z-index: 0;
 }
 .place-item[data-last="true"]::before { display: none; }
 
-.place-num {
-  width: 24px; height: 24px;
+.pin-num {
+  width: 22px; height: 22px;
   border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.6rem; font-weight: 800; color: white;
-  flex-shrink: 0; margin-top: 2px;
-  position: relative; z-index: 1;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-size: 0.58rem; font-weight: 800; color: #fff;
+  flex-shrink: 0; margin-top: 2px; position: relative; z-index: 1;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.22);
 }
-.place-num span { transform: rotate(45deg); display: block; }
+.pin-num span { transform: rotate(45deg); display: block; }
 
 .place-info { flex: 1; min-width: 0; }
-.place-time { font-size: 0.63rem; color: var(--color-text-muted); font-weight: 600; margin-bottom: 1px; }
-.place-name { font-size: 0.83rem; font-weight: 700; line-height: 1.35; color: var(--color-text-primary); }
-.place-cat {
-  font-size: 0.67rem; font-weight: 600; margin-top: 2px;
+.place-time { font-size: 0.62rem; color: var(--muted); font-weight: 600; margin-bottom: 1px; }
+.place-name { font-size: 0.82rem; font-weight: 700; line-height: 1.3; color: var(--text); }
+.place-cat  {
+  font-size: 0.65rem; font-weight: 600; margin-top: 2px;
   padding: 1px 7px; border-radius: 9999px; display: inline-block;
 }
-.place-note { font-size: 0.67rem; color: var(--color-text-muted); margin-top: 3px; line-height: 1.4; }
-.gmap-btn {
-  display: inline-flex; align-items: center; gap: 3px;
-  margin-top: 5px; font-size: 0.63rem; color: var(--color-accent);
-  font-weight: 600; text-decoration: none;
-  background: var(--color-accent-bg); border-radius: var(--radius-sm);
-  padding: 3px 8px; transition: background 0.15s; font-family: var(--font);
-}
-.gmap-btn:hover { background: var(--color-accent-light); }
+.place-note { font-size: 0.65rem; color: var(--muted); margin-top: 2px; line-height: 1.4; }
 
 /* 범례 */
 #legend {
-  padding: 10px 16px; border-top: 1px solid var(--color-border-light);
-  background: var(--color-bg); flex-shrink: 0;
+  padding: 9px 16px; border-top: 1px solid var(--border);
+  background: var(--bg); flex-shrink: 0;
 }
 .legend-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.legend-item { display: flex; align-items: center; gap: 4px; font-size: 0.63rem; color: var(--color-text-muted); }
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 0.62rem; color: var(--muted); }
 
-/* ── 지도 영역 ── */
-#map-area {
-  flex: 1; height: 100%; position: relative; overflow: hidden;
-  background: #eef0f5;
-}
-#map-iframe { width: 100%; height: 100%; border: none; display: block; }
+/* ── 지도 ── */
+#map { flex: 1; height: 100%; }
 
-/* 지도 플레이스홀더 */
-#map-placeholder {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: linear-gradient(160deg, #f0eaff 0%, #e8f4fd 100%);
-  gap: 20px; z-index: 5;
-}
-#map-placeholder .ph-icon { font-size: 4rem; }
-#map-placeholder .ph-title { font-size: 1.1rem; font-weight: 800; color: var(--color-accent); }
-#map-placeholder .ph-sub { font-size: 0.82rem; color: var(--color-text-muted); text-align: center; line-height: 1.7; }
-
-/* DAY 경로 카드 */
-#route-cards {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 16px; display: flex; gap: 10px; overflow-x: auto;
-  background: linear-gradient(to top, rgba(240,234,255,0.95) 60%, transparent);
-  z-index: 6;
-}
-#route-cards::-webkit-scrollbar { height: 4px; }
-#route-cards::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
-.route-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-  padding: 14px 16px; min-width: 200px; flex-shrink: 0;
-  cursor: pointer; transition: all 0.2s;
-  text-decoration: none; color: inherit; display: block;
-}
-.route-card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
-.route-card-day { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-.route-card-label { font-size: 0.88rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; }
-.route-card-stops { font-size: 0.7rem; color: var(--color-text-muted); line-height: 1.6; }
-.route-card-btn {
-  margin-top: 10px; display: inline-flex; align-items: center; gap: 4px;
-  background: var(--color-accent); color: white;
-  border-radius: var(--radius-sm); padding: 5px 12px;
-  font-size: 0.7rem; font-weight: 700; font-family: var(--font);
-}
-
-/* 장소 팝업 */
-#place-popup {
-  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card-hover);
-  padding: 16px 20px; min-width: 300px; max-width: 420px;
-  z-index: 20; display: none;
-}
-#place-popup.show { display: block; animation: popIn 0.2s ease; }
-@keyframes popIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-.popup-close {
-  position: absolute; top: 10px; right: 12px;
-  background: none; border: none; font-size: 1rem;
-  cursor: pointer; color: var(--color-text-muted);
-}
-.popup-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.popup-num {
-  width: 28px; height: 28px;
+/* 구글맵 InfoWindow 커스텀 */
+.iw-wrap { font-family: var(--font); min-width: 220px; max-width: 300px; }
+.iw-header { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+.iw-pin {
+  width: 26px; height: 26px;
   border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.65rem; font-weight: 800; color: white; flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-size: 0.6rem; font-weight: 800; color: #fff; flex-shrink: 0;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.22);
 }
-.popup-num span { transform: rotate(45deg); display: block; }
-.popup-title { font-size: 0.95rem; font-weight: 800; color: var(--color-text-primary); }
-.popup-time { font-size: 0.7rem; color: var(--color-text-muted); font-weight: 600; margin-top: 1px; }
-.popup-items { font-size: 0.78rem; color: var(--color-text-secondary); line-height: 1.7; }
-.popup-items li { list-style: none; }
-.popup-items li::before { content: "·  "; color: var(--color-accent); font-weight: 700; }
-.popup-footer { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
-.popup-gmap {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: var(--color-accent); color: white;
-  border-radius: var(--radius-sm); padding: 7px 14px;
-  font-size: 0.75rem; font-weight: 700; text-decoration: none;
-  transition: opacity 0.2s; font-family: var(--font);
+.iw-pin span { transform: rotate(45deg); display: block; }
+.iw-title { font-size: 0.9rem; font-weight: 800; color: #1f2021; }
+.iw-time  { font-size: 0.68rem; color: #757575; font-weight: 600; margin-top: 1px; }
+.iw-items { font-size: 0.75rem; color: #525457; line-height: 1.7; margin-bottom: 10px; }
+.iw-items li { list-style: none; }
+.iw-items li::before { content: "· "; color: #5511bc; font-weight: 700; }
+.iw-btns { display: flex; gap: 7px; flex-wrap: wrap; }
+.iw-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 12px; border-radius: 6px;
+  font-size: 0.72rem; font-weight: 700; text-decoration: none;
+  font-family: var(--font); transition: opacity 0.15s;
 }
-.popup-gmap:hover { opacity: 0.88; }
-.popup-route {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: var(--color-bg); color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm); padding: 7px 14px;
-  font-size: 0.75rem; font-weight: 600; text-decoration: none;
-  transition: all 0.2s; font-family: var(--font);
-}
-.popup-route:hover { background: var(--color-accent-light); color: var(--color-accent); border-color: var(--color-accent); }
+.iw-btn:hover { opacity: 0.85; }
+.iw-btn-primary { background: #5511bc; color: #fff; }
+.iw-btn-sec { background: #f6f8fb; color: #525457; border: 1px solid #ddd; }
 
-/* 지도 컨트롤 */
-#map-controls {
-  position: absolute; top: 16px; right: 16px;
-  display: flex; flex-direction: column; gap: 8px; z-index: 10;
+/* 지도 위 DAY 버튼 */
+#day-btns {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; z-index: 10; pointer-events: all;
 }
-.map-ctrl-btn {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-md);
-  padding: 8px 14px; font-size: 0.75rem; font-weight: 700;
-  color: var(--color-text-primary); cursor: pointer;
-  box-shadow: var(--shadow-card); transition: all 0.2s;
-  font-family: var(--font); white-space: nowrap;
+.day-btn {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 20px; padding: 6px 14px;
+  font-size: 0.72rem; font-weight: 700; color: var(--sub);
+  cursor: pointer; box-shadow: var(--shadow);
+  transition: all 0.18s; font-family: var(--font); white-space: nowrap;
 }
-.map-ctrl-btn:hover { background: var(--color-accent-light); color: var(--color-accent); }
-.map-ctrl-btn.active { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+.day-btn:hover { background: var(--accent-light); color: var(--accent); }
+.day-btn.active { color: #fff; border-color: transparent; }
 
 /* 모바일 */
-#toggle-panel { display: none; }
+#mob-toggle { display: none; }
 @media (max-width: 680px) {
-  :root { --panel-w: 100vw; }
+  :root { --panel: 100vw; }
   #panel { position: fixed; top: 0; left: 0; width: 100%; height: 55%; z-index: 200; transition: transform 0.3s; }
   #panel.hidden { transform: translateY(-100%); }
-  #map-area { position: fixed; bottom: 0; left: 0; width: 100%; height: 50%; }
-  #toggle-panel {
+  #map { position: fixed; bottom: 0; left: 0; width: 100%; height: 50%; }
+  #day-btns { top: auto; bottom: 70px; }
+  #mob-toggle {
     display: flex; align-items: center; justify-content: center;
-    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-    z-index: 9999; background: var(--color-accent); color: white;
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    z-index: 9999; background: var(--accent); color: #fff;
     border: none; border-radius: 24px; padding: 10px 24px;
     font-size: 0.82rem; font-weight: 700; cursor: pointer;
     box-shadow: 0 4px 16px rgba(85,17,188,0.35); font-family: var(--font);
@@ -279,7 +185,7 @@ html, body { height: 100%; font-family: var(--font); background: var(--color-bg)
   <div id="panel">
     <div id="panel-header">
       <h1>🌺 오키나와 후발대 일정</h1>
-      <p>장소 클릭 → 구글맵 이동 &nbsp;|&nbsp; 4월 12~15일 · 4일</p>
+      <p>장소 클릭 → 지도에서 바로 확인 &nbsp;|&nbsp; 4월 12~15일 · 4일</p>
     </div>
     <div id="day-tabs">
       <div class="day-tab active" data-day="all" onclick="filterDay('all',this)">전체</div>
@@ -299,193 +205,238 @@ html, body { height: 100%; font-family: var(--font); background: var(--color-bg)
     </div>
   </div>
 
-  <!-- ── 지도 영역 ── -->
-  <div id="map-area">
-    <!-- 구글맵 iframe -->
-    <iframe id="map-iframe" allowfullscreen loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      src="about:blank">
-    </iframe>
-
-    <!-- 초기 플레이스홀더 -->
-    <div id="map-placeholder">
-      <div class="ph-icon">🗺️</div>
-      <div class="ph-title">오키나와 후발대 동선</div>
-      <div class="ph-sub">왼쪽 장소를 클릭하면 구글맵에서 확인할 수 있어요<br/>DAY 경로 버튼으로 전체 동선을 한눈에 보세요</div>
-      <div id="route-cards-placeholder"></div>
+  <!-- ── 지도 ── -->
+  <div style="flex:1;position:relative;">
+    <div id="map"></div>
+    <div id="day-btns">
+      <button class="day-btn active" id="dbtn-all" style="background:var(--accent)" onclick="showDay('all',this)">전체</button>
+      <button class="day-btn" id="dbtn-1" onclick="showDay(1,this)">DAY1·토</button>
+      <button class="day-btn" id="dbtn-2" onclick="showDay(2,this)">DAY2·일</button>
+      <button class="day-btn" id="dbtn-3" onclick="showDay(3,this)">DAY3·월</button>
+      <button class="day-btn" id="dbtn-4" onclick="showDay(4,this)">DAY4·화</button>
     </div>
-
-    <!-- 지도 컨트롤 -->
-    <div id="map-controls">
-      <button class="map-ctrl-btn active" id="btn-all" onclick="showMapAll()">🗺 전체 보기</button>
-      <button class="map-ctrl-btn" id="btn-d1" onclick="openDayRoute(1)">DAY1 경로 열기</button>
-      <button class="map-ctrl-btn" id="btn-d2" onclick="openDayRoute(2)">DAY2 경로 열기</button>
-      <button class="map-ctrl-btn" id="btn-d3" onclick="openDayRoute(3)">DAY3 경로 열기</button>
-      <button class="map-ctrl-btn" id="btn-d4" onclick="openDayRoute(4)">DAY4 경로 열기</button>
-    </div>
-
-    <!-- 장소 팝업 -->
-    <div id="place-popup">
-      <button class="popup-close" onclick="closePopup()">✕</button>
-      <div class="popup-header">
-        <div class="popup-num" id="popup-num"><span></span></div>
-        <div>
-          <div class="popup-title" id="popup-title"></div>
-          <div class="popup-time" id="popup-time"></div>
-        </div>
-      </div>
-      <ul class="popup-items" id="popup-items"></ul>
-      <div class="popup-footer">
-        <a class="popup-gmap" id="popup-gmap" href="#" target="_blank">📍 구글맵에서 보기</a>
-        <a class="popup-route" id="popup-route" href="#" target="_blank">🚗 길찾기</a>
-      </div>
-    </div>
-
-    <!-- DAY 경로 카드 (하단) -->
-    <div id="route-cards"></div>
   </div>
 
 </div>
-<button id="toggle-panel" onclick="togglePanel()">📋 일정 보기</button>
+<button id="mob-toggle" onclick="togglePanel()">📋 일정 보기</button>
 
 <script>
 // ══════════════════════════════════════════
 // 장소 데이터
 // ══════════════════════════════════════════
-const DAYS = [
+const DAYS_DATA = [
   {
-    day: 1, label: "DAY 1 · 토요일", color: "#5511bc",
-    pins: [
-      { id:1, time:"17:15", name:"나하 공항", icon:"✈️", cat:"이동", lat:26.1958, lng:127.6460,
-        items:["17:15 오키나와 도착","18:10 출발 → 택시 이동 (약 150,000원)"],
-        note:"나하 공항 → 하얏트 리젠시 세라가키 약 70분",
-        q:"나하공항 오키나와" },
-      { id:2, time:"19:30", name:"하얏트 리젠시 세라가키 아일랜드", icon:"🏨", cat:"숙소", lat:26.5017, lng:127.8633,
-        items:["19:30 체크인 (토·일 숙소)","★ 5성급 리조트 / 전용 해변"],
-        note:"1108 Serakaki, Onna, Kunigami",
-        q:"Hyatt Regency Seragaki Island Okinawa" },
-      { id:3, time:"19:30", name:"세라레 (저녁)", icon:"🍽️", cat:"식사", lat:26.5017, lng:127.8633,
-        items:["19:30 저녁 — 세라레 (양식 / 호텔 레스토랑)"],
-        note:"하얏트 리젠시 내 레스토랑",
-        q:"Cerare Restaurant Hyatt Regency Seragaki Okinawa" },
-      { id:4, time:"21:00", name:"호텔 라운지 (네트워킹)", icon:"🍺", cat:"네트워킹", lat:26.5017, lng:127.8633,
-        items:["21:00 라운지 맥주 & 네트워킹"],
-        note:"하얏트 리젠시 로비 라운지",
-        q:"Hyatt Regency Seragaki Island Okinawa" }
+    day:1, label:"DAY 1 · 토요일", color:"#5511bc",
+    pins:[
+      { id:1,  time:"17:15", name:"나하 공항",                      icon:"✈️", cat:"이동",   lat:26.1958, lng:127.6460, items:["17:15 오키나와 도착","18:10 출발 → 택시 이동 (약 150,000원)"],                                    note:"나하 공항 → 하얏트 리젠시 세라가키 약 70분",         q:"나하공항 오키나와" },
+      { id:2,  time:"19:30", name:"하얏트 리젠시 세라가키 아일랜드", icon:"🏨", cat:"숙소",   lat:26.5017, lng:127.8633, items:["19:30 체크인 (토·일 숙소)","★ 5성급 리조트 / 전용 해변"],                                         note:"1108 Serakaki, Onna, Kunigami",                     q:"Hyatt Regency Seragaki Island Okinawa" },
+      { id:3,  time:"19:30", name:"세라레 (저녁)",                   icon:"🍽️", cat:"식사",   lat:26.5017, lng:127.8640, items:["19:30 저녁 — 세라레 (양식 / 호텔 레스토랑)"],                                                    note:"하얏트 리젠시 내 레스토랑",                          q:"Cerare Restaurant Hyatt Regency Seragaki Okinawa" },
+      { id:4,  time:"21:00", name:"호텔 라운지 (네트워킹)",           icon:"🍺", cat:"네트워킹",lat:26.5018, lng:127.8628, items:["21:00 라운지 맥주 & 네트워킹"],                                                                   note:"하얏트 리젠시 로비 라운지",                          q:"Hyatt Regency Seragaki Island Okinawa" }
     ]
   },
   {
-    day: 2, label: "DAY 2 · 일요일", color: "#0077b6",
-    pins: [
-      { id:5, time:"08:00", name:"세라레 (조식)", icon:"🥞", cat:"식사", lat:26.5017, lng:127.8633,
-        items:["08:00~09:00 조식 뷔페 — 세라레","09:00~10:00 수영"],
-        note:"하얏트 리젠시 내 레스토랑",
-        q:"Cerare Restaurant Hyatt Regency Seragaki Okinawa" },
-      { id:6, time:"10:30", name:"반타 카페", icon:"☕", cat:"카페", lat:26.5285, lng:127.9177,
-        items:["10:30~12:00 반타 카페","12:00 선발대와 분리"],
-        note:"오키나와 북부 절벽 위 오션뷰 카페",
-        q:"Banta Cafe Okinawa" },
-      { id:7, time:"14:00", name:"나키진 라멘 / 산파치 라멘", icon:"🍜", cat:"식사", lat:26.6906, lng:127.9414,
-        items:["14:00 점심 — 나키진 라멘 or 산파치 라멘"],
-        note:"나키진 지역 라멘 맛집",
-        q:"今帰仁ラーメン 沖縄" },
-      { id:8, time:"15:30", name:"세소코 비치", icon:"🏖️", cat:"관광", lat:26.6453, lng:127.8608,
-        items:["15:30 세소코 비치 도착","17:00~18:00 수영"],
-        note:"에메랄드빛 비치 / 스노클링 가능",
-        q:"瀬底ビーチ 沖縄" },
-      { id:9, time:"17:00", name:"Villa Speciale (숙소)", icon:"🏡", cat:"숙소", lat:26.6512, lng:127.8801,
-        items:["17:00 체크인 — Villa Speciale","오키나와 북부 모토부 프라이빗 풀빌라","츄라우미 수족관 5분 거리"],
-        note:"328-7 Toyohara, Motobu | 단독 별채 풀빌라",
-        q:"Villa Speciale Motobu Okinawa" },
-      { id:10, time:"19:00", name:"모토부팜 (야끼니꾸)", icon:"🥩", cat:"식사", lat:26.6600, lng:127.9000,
-        items:["19:00 저녁 — 모토부팜 야끼니꾸","21:00 편의점 → 21:30 숙소 네트워킹"],
-        note:"오키나와산 아구 돼지고기 전문점",
-        q:"もとぶ牧場 沖縄" }
+    day:2, label:"DAY 2 · 일요일", color:"#0077b6",
+    pins:[
+      { id:5,  time:"08:00", name:"세라레 (조식)",                   icon:"🥞", cat:"식사",   lat:26.5017, lng:127.8640, items:["08:00~09:00 조식 뷔페 — 세라레","09:00~10:00 수영"],                                             note:"하얏트 리젠시 내 레스토랑",                          q:"Cerare Restaurant Hyatt Regency Seragaki Okinawa" },
+      { id:6,  time:"10:30", name:"반타 카페",                        icon:"☕", cat:"카페",   lat:26.5285, lng:127.9177, items:["10:30~12:00 반타 카페","12:00 선발대와 분리"],                                                    note:"오키나와 북부 절벽 위 오션뷰 카페",                  q:"Banta Cafe Okinawa" },
+      { id:7,  time:"14:00", name:"나키진 라멘 / 산파치 라멘",        icon:"🍜", cat:"식사",   lat:26.6906, lng:127.9414, items:["14:00 점심 — 나키진 라멘 or 산파치 라멘"],                                                       note:"나키진 지역 라멘 맛집",                              q:"今帰仁ラーメン 沖縄" },
+      { id:8,  time:"15:30", name:"세소코 비치",                      icon:"🏖️", cat:"관광",   lat:26.6453, lng:127.8608, items:["15:30 세소코 비치 도착","17:00~18:00 수영"],                                                     note:"에메랄드빛 비치 / 스노클링 가능",                    q:"瀬底ビーチ 沖縄" },
+      { id:9,  time:"17:00", name:"Villa Speciale (숙소)",            icon:"🏡", cat:"숙소",   lat:26.6512, lng:127.8801, items:["17:00 체크인 — Villa Speciale","오키나와 북부 모토부 프라이빗 풀빌라","츄라우미 수족관 5분 거리"], note:"328-7 Toyohara, Motobu | 단독 별채 풀빌라",          q:"Villa Speciale Motobu Okinawa" },
+      { id:10, time:"19:00", name:"모토부팜 (야끼니꾸)",              icon:"🥩", cat:"식사",   lat:26.6600, lng:127.9000, items:["19:00 저녁 — 모토부팜 야끼니꾸","21:00 편의점 → 21:30 숙소 네트워킹"],                           note:"오키나와산 아구 돼지고기 전문점",                    q:"もとぶ牧場 沖縄" }
     ]
   },
   {
-    day: 3, label: "DAY 3 · 월요일", color: "#e65100",
-    pins: [
-      { id:11, time:"10:20", name:"킹 타코스", icon:"🌮", cat:"식사", lat:26.6378, lng:127.9022,
-        items:["10:20 타코라이스 — 킹 타코스","10:00 체크아웃 후 이동"],
-        note:"오키나와 타코라이스 원조 맛집",
-        q:"キングタコス 沖縄" },
-      { id:12, time:"11:30", name:"잔파곶 오션뷰 카페", icon:"☕", cat:"카페", lat:26.4442, lng:127.7128,
-        items:["11:30~12:10 Cape Zanpa 오션뷰 카페"],
-        note:"잔파곶 절벽 위 오션뷰 카페",
-        q:"残波岬 カフェ 沖縄" },
-      { id:13, time:"12:50", name:"아메리칸 빌리지", icon:"🎡", cat:"관광/식사", lat:26.3147, lng:127.7558,
-        items:["12:50 도착 — 아메리칸 빌리지","14:00 점심 — 스시로 (회전초밥)","15:00 디저트 — 블루씰 아이스크림","~16:00 자유시간"],
-        note:"스시로·블루씰 모두 아메리칸 빌리지 내",
-        q:"American Village Chatan Okinawa" },
-      { id:14, time:"17:00", name:"호텔 컬렉티브 나하", icon:"🏨", cat:"숙소", lat:26.2172, lng:127.6894,
-        items:["17:00 체크인 — 호텔 컬렉티브 나하"],
-        note:"나하 국제거리 도보권 디자인 호텔",
-        q:"Hotel Collective Naha Okinawa" },
-      { id:15, time:"17:30", name:"돈키호테 국제거리", icon:"🛒", cat:"쇼핑", lat:26.2162, lng:127.6882,
-        items:["17:30 쇼핑 — 돈키호테 국제거리점"],
-        note:"기념품·화장품·과자 / 면세 가능",
-        q:"ドン・キホーテ 国際通り店 那覇" },
-      { id:16, time:"18:30", name:"우후야 (향토요리)", icon:"🍱", cat:"식사", lat:26.2180, lng:127.7010,
-        items:["18:30 1차 — 우후야 오키나와 향토요리"],
-        note:"고민가 개조 향토요리 레스토랑",
-        q:"うふやー 那覇 沖縄料理" },
-      { id:17, time:"20:00", name:"유키 (해산물 이자카야)", icon:"🦞", cat:"식사", lat:26.2165, lng:127.6870,
-        items:["20:00 2차 — 유키 해산물 이자카야"],
-        note:"신선한 오키나와 해산물",
-        q:"ゆき 那覇 居酒屋 海鮮" },
-      { id:18, time:"21:30", name:"현지 이자카야 (꼬치)", icon:"🍢", cat:"식사", lat:26.2158, lng:127.6860,
-        items:["21:30 3차 — 현지 이자카야 꼬치/술집"],
-        note:"국제거리 인근 현지 이자카야",
-        q:"那覇 国際通り 居酒屋 焼き鳥" }
+    day:3, label:"DAY 3 · 월요일", color:"#e65100",
+    pins:[
+      { id:11, time:"10:20", name:"킹 타코스",                       icon:"🌮", cat:"식사",   lat:26.6378, lng:127.9022, items:["10:20 타코라이스 — 킹 타코스","10:00 체크아웃 후 이동"],                                         note:"오키나와 타코라이스 원조 맛집",                      q:"キングタコス 沖縄" },
+      { id:12, time:"11:30", name:"잔파곶 오션뷰 카페",               icon:"☕", cat:"카페",   lat:26.4442, lng:127.7128, items:["11:30~12:10 Cape Zanpa 오션뷰 카페"],                                                            note:"잔파곶 절벽 위 오션뷰 카페",                         q:"残波岬 カフェ 沖縄" },
+      { id:13, time:"12:50", name:"아메리칸 빌리지",                  icon:"🎡", cat:"관광/식사",lat:26.3147,lng:127.7558, items:["12:50 도착 — 아메리칸 빌리지","14:00 점심 — 스시로 (회전초밥)","15:00 디저트 — 블루씰 아이스크림","~16:00 자유시간"], note:"스시로·블루씰 모두 아메리칸 빌리지 내",    q:"American Village Chatan Okinawa" },
+      { id:14, time:"17:00", name:"호텔 컬렉티브 나하",               icon:"🏨", cat:"숙소",   lat:26.2172, lng:127.6894, items:["17:00 체크인 — 호텔 컬렉티브 나하"],                                                            note:"나하 국제거리 도보권 디자인 호텔",                   q:"Hotel Collective Naha Okinawa" },
+      { id:15, time:"17:30", name:"돈키호테 국제거리",                icon:"🛒", cat:"쇼핑",   lat:26.2162, lng:127.6882, items:["17:30 쇼핑 — 돈키호테 국제거리점"],                                                             note:"기념품·화장품·과자 / 면세 가능",                     q:"ドン・キホーテ 国際通り店 那覇" },
+      { id:16, time:"18:30", name:"우후야 (향토요리)",                icon:"🍱", cat:"식사",   lat:26.2180, lng:127.7010, items:["18:30 1차 — 우후야 오키나와 향토요리"],                                                         note:"고민가 개조 향토요리 레스토랑",                      q:"うふやー 那覇 沖縄料理" },
+      { id:17, time:"20:00", name:"유키 (해산물 이자카야)",           icon:"🦞", cat:"식사",   lat:26.2165, lng:127.6870, items:["20:00 2차 — 유키 해산물 이자카야"],                                                             note:"신선한 오키나와 해산물",                             q:"ゆき 那覇 居酒屋 海鮮" },
+      { id:18, time:"21:30", name:"현지 이자카야 (꼬치)",             icon:"🍢", cat:"식사",   lat:26.2158, lng:127.6860, items:["21:30 3차 — 현지 이자카야 꼬치/술집"],                                                          note:"국제거리 인근 현지 이자카야",                        q:"那覇 国際通り 居酒屋 焼き鳥" }
     ]
   },
   {
-    day: 4, label: "DAY 4 · 화요일", color: "#2e7d32",
-    pins: [
-      { id:19, time:"11:30", name:"장어 로만 (장어덮밥)", icon:"🐟", cat:"식사", lat:26.2170, lng:127.6900,
-        items:["11:30 점심 — 장어 로만 (장어덮밥)","3인 자유일정 (18:15 비행)"],
-        note:"나하 국제거리 인근",
-        q:"うなぎ 那覇 沖縄" },
-      { id:20, time:"13:30", name:"세나가지마 우미카지 테라스", icon:"🌊", cat:"카페", lat:26.1720, lng:127.6590,
-        items:["13:30~14:40 세나가지마 우미카지 테라스","Cafe 52.42 / 해피팬케이크"],
-        note:"오키나와 공항 인근 오션뷰 테라스",
-        q:"瀬長島ウミカジテラス 沖縄" },
-      { id:21, time:"16:00", name:"나하 공항 (출발)", icon:"✈️", cat:"이동", lat:26.1958, lng:127.6460,
-        items:["15:30 차량 반납","16:00 공항 도착","18:15 인천 출발 (3인팀)"],
-        note:"부산팀: 11:00 비행 / 3인팀: 18:15 비행",
-        q:"나하공항 오키나와" }
+    day:4, label:"DAY 4 · 화요일", color:"#2e7d32",
+    pins:[
+      { id:19, time:"11:30", name:"장어 로만 (장어덮밥)",             icon:"🐟", cat:"식사",   lat:26.2170, lng:127.6900, items:["11:30 점심 — 장어 로만 (장어덮밥)","3인 자유일정 (18:15 비행)"],                               note:"나하 국제거리 인근",                                 q:"うなぎ 那覇 沖縄" },
+      { id:20, time:"13:30", name:"세나가지마 우미카지 테라스",        icon:"🌊", cat:"카페",   lat:26.1720, lng:127.6590, items:["13:30~14:40 세나가지마 우미카지 테라스","Cafe 52.42 / 해피팬케이크"],                            note:"오키나와 공항 인근 오션뷰 테라스",                   q:"瀬長島ウミカジテラス 沖縄" },
+      { id:21, time:"16:00", name:"나하 공항 (출발)",                 icon:"✈️", cat:"이동",   lat:26.1958, lng:127.6460, items:["15:30 차량 반납","16:00 공항 도착","18:15 인천 출발 (3인팀)"],                                  note:"부산팀: 11:00 비행 / 3인팀: 18:15 비행",             q:"나하공항 오키나와" }
     ]
   }
 ];
 
-// ── URL 생성 ──
-function gmapUrl(pin) {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pin.q || pin.name)}`;
+const ALL_PINS = DAYS_DATA.flatMap(d => d.pins.map(p => ({...p, color: d.color, dayNum: d.day})));
+
+// ── 구글맵 변수 ──
+let map, infoWindow;
+const markers = {};
+const polylines = {};
+let currentDay = 'all';
+
+// ── 지도 초기화 ──
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 26.45, lng: 127.80 },
+    zoom: 10,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: true,
+    zoomControl: true,
+    styles: [
+      { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
+      { featureType: "transit", elementType: "labels", stylers: [{ visibility: "off" }] }
+    ]
+  });
+
+  infoWindow = new google.maps.InfoWindow({ maxWidth: 320 });
+
+  // 마커 & 경로선 생성
+  DAYS_DATA.forEach(d => {
+    const path = [];
+    d.pins.forEach((pin, idx) => {
+      const pos = { lat: pin.lat, lng: pin.lng };
+      path.push(pos);
+
+      // SVG 핀 마커
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
+          <path d="M16 0C7.163 0 0 7.163 0 16c0 10 16 24 16 24s16-14 16-24C32 7.163 24.837 0 16 0z"
+                fill="${d.color}" stroke="white" stroke-width="2"/>
+          <text x="16" y="20" text-anchor="middle" dominant-baseline="middle"
+                font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="white">${pin.id}</text>
+        </svg>`;
+
+      const marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        icon: {
+          url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+          scaledSize: new google.maps.Size(32, 40),
+          anchor: new google.maps.Point(16, 40)
+        },
+        title: pin.name,
+        zIndex: 100 + pin.id
+      });
+
+      marker.addListener('click', () => openInfoWindow(pin, d.color, marker));
+      markers[pin.id] = { marker, pin, color: d.color };
+    });
+
+    // 경로선
+    const poly = new google.maps.Polyline({
+      path,
+      geodesic: true,
+      strokeColor: d.color,
+      strokeOpacity: 0.75,
+      strokeWeight: 3,
+      icons: [{
+        icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, fillColor: d.color, fillOpacity: 1, strokeWeight: 0 },
+        offset: '50%',
+        repeat: '120px'
+      }],
+      map: map
+    });
+    polylines[d.day] = poly;
+  });
+
+  // 패널 렌더링
+  renderList('all');
 }
-function gmapRouteUrl(pin) {
-  return `https://www.google.com/maps/dir/?api=1&destination=${pin.lat},${pin.lng}`;
+
+// ── InfoWindow 열기 ──
+function openInfoWindow(pin, color, marker) {
+  const itemsHtml = pin.items.map(i => `<li>${i}</li>`).join('');
+  const content = `
+    <div class="iw-wrap">
+      <div class="iw-header">
+        <div class="iw-pin" style="background:${color}"><span>${pin.id}</span></div>
+        <div>
+          <div class="iw-title">${pin.name}</div>
+          <div class="iw-time">${pin.icon} ${pin.time}</div>
+        </div>
+      </div>
+      <ul class="iw-items">${itemsHtml}</ul>
+      <div style="font-size:0.68rem;color:#9ca3af;margin-bottom:10px">${pin.note}</div>
+      <div class="iw-btns">
+        <a class="iw-btn iw-btn-primary" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pin.q||pin.name)}" target="_blank">📍 구글맵 열기</a>
+        <a class="iw-btn iw-btn-sec" href="https://www.google.com/maps/dir/?api=1&destination=${pin.lat},${pin.lng}" target="_blank">🚗 길찾기</a>
+      </div>
+    </div>`;
+  infoWindow.setContent(content);
+  infoWindow.open(map, marker);
+  map.panTo(marker.getPosition());
+
+  // 패널 활성화
+  document.querySelectorAll('.place-item').forEach(el => el.classList.remove('active'));
+  const el = document.querySelector(`.place-item[data-id="${pin.id}"]`);
+  if (el) { el.classList.add('active'); el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
 }
-function gmapDayRouteUrl(day) {
-  const d = DAYS.find(x => x.day === day);
-  if (!d) return '#';
-  const pins = d.pins;
-  if (pins.length === 1) return gmapUrl(pins[0]);
-  const parts = pins.map(p => `${p.lat},${p.lng}`);
-  return `https://www.google.com/maps/dir/${parts.join('/')}`;
+
+// ── 패널 장소 클릭 ──
+function clickPlace(pinId) {
+  const m = markers[pinId];
+  if (!m) return;
+  map.panTo(m.marker.getPosition());
+  map.setZoom(15);
+  openInfoWindow(m.pin, m.color, m.marker);
 }
-function gmapEmbedUrl(pin) {
-  return `https://maps.google.com/maps?q=${encodeURIComponent(pin.q || pin.name)}&output=embed&hl=ko&z=15`;
+
+// ── DAY 필터 (패널 탭) ──
+function filterDay(day, tabEl) {
+  currentDay = day;
+  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+  tabEl.classList.add('active');
+  renderList(day);
+  infoWindow.close();
+}
+
+// ── DAY 버튼 (지도 위) ──
+function showDay(day, btnEl) {
+  document.querySelectorAll('.day-btn').forEach(b => {
+    b.classList.remove('active');
+    b.style.background = '';
+    b.style.color = '';
+  });
+  btnEl.classList.add('active');
+
+  if (day === 'all') {
+    btnEl.style.background = '#5511bc';
+    btnEl.style.color = '#fff';
+    Object.values(markers).forEach(m => m.marker.setVisible(true));
+    Object.values(polylines).forEach(p => p.setVisible(true));
+    fitBounds('all');
+  } else {
+    const d = DAYS_DATA.find(x => x.day === day);
+    btnEl.style.background = d.color;
+    btnEl.style.color = '#fff';
+    Object.values(markers).forEach(m => m.marker.setVisible(m.pin.dayNum === day));
+    Object.values(polylines).forEach((p, k) => p.setVisible(Number(Object.keys(polylines)[k]) === day));
+    // polylines 키 기반으로 처리
+    Object.entries(polylines).forEach(([k, p]) => p.setVisible(Number(k) === day));
+    fitBounds(day);
+  }
+  infoWindow.close();
+}
+
+// ── 지도 범위 조정 ──
+function fitBounds(day) {
+  const bounds = new google.maps.LatLngBounds();
+  const pins = day === 'all' ? ALL_PINS : ALL_PINS.filter(p => p.dayNum === day);
+  pins.forEach(p => bounds.extend({ lat: p.lat, lng: p.lng }));
+  map.fitBounds(bounds, { top: 60, right: 20, bottom: 20, left: 20 });
 }
 
 // ── 패널 렌더링 ──
 function renderList(day) {
   const list = document.getElementById('place-list');
   list.innerHTML = '';
-  const days = day === 'all' ? DAYS : DAYS.filter(d => d.day === day);
+  const days = day === 'all' ? DAYS_DATA : DAYS_DATA.filter(d => d.day === day);
   days.forEach(d => {
     const hdr = document.createElement('div');
-    hdr.className = 'day-group-header';
+    hdr.className = 'day-group-hdr';
     hdr.innerHTML = `<div class="day-dot" style="background:${d.color}"></div>${d.label}`;
     list.appendChild(hdr);
     d.pins.forEach((pin, idx) => {
@@ -493,111 +444,33 @@ function renderList(day) {
       item.className = 'place-item';
       item.dataset.id = pin.id;
       if (idx === d.pins.length - 1) item.dataset.last = 'true';
-      const catBg = d.color + '18';
+      const catBg = d.color + '1a';
       item.innerHTML = `
-        <div class="place-num" style="background:${d.color}"><span>${pin.id}</span></div>
+        <div class="pin-num" style="background:${d.color}"><span>${pin.id}</span></div>
         <div class="place-info">
           <div class="place-time">${pin.icon} ${pin.time}</div>
           <div class="place-name">${pin.name}</div>
           <span class="place-cat" style="background:${catBg};color:${d.color}">${pin.cat}</span>
           <div class="place-note">${pin.note}</div>
-          <a class="gmap-btn" href="${gmapUrl(pin)}" target="_blank" onclick="event.stopPropagation()">📍 구글맵 열기</a>
         </div>`;
-      item.addEventListener('click', () => selectPin(pin, d.color));
+      item.addEventListener('click', () => clickPlace(pin.id));
       list.appendChild(item);
     });
   });
 }
 
-// ── DAY 경로 카드 렌더링 ──
-function renderRouteCards() {
-  const container = document.getElementById('route-cards');
-  container.innerHTML = '';
-  DAYS.forEach(d => {
-    const card = document.createElement('a');
-    card.className = 'route-card';
-    card.href = gmapDayRouteUrl(d.day);
-    card.target = '_blank';
-    const stops = d.pins.map((p,i) => `${i+1}. ${p.name}`).join('<br>');
-    card.innerHTML = `
-      <div class="route-card-day" style="color:${d.color}">${d.label}</div>
-      <div class="route-card-label">📍 ${d.pins.length}개 장소</div>
-      <div class="route-card-stops">${stops}</div>
-      <div class="route-card-btn" style="background:${d.color}">🗺 경로 열기</div>`;
-    container.appendChild(card);
-  });
-}
-
-// ── 핀 선택 ──
-function selectPin(pin, color) {
-  document.querySelectorAll('.place-item').forEach(el => el.classList.remove('active'));
-  const el = document.querySelector(`.place-item[data-id="${pin.id}"]`);
-  if (el) { el.classList.add('active'); el.scrollIntoView({block:'nearest', behavior:'smooth'}); }
-
-  // 지도 iframe 업데이트
-  const iframe = document.getElementById('map-iframe');
-  const ph = document.getElementById('map-placeholder');
-  iframe.src = gmapEmbedUrl(pin);
-  if (ph) ph.style.display = 'none';
-
-  // 팝업
-  const popup = document.getElementById('place-popup');
-  document.getElementById('popup-num').innerHTML = `<span style="transform:rotate(45deg);display:block">${pin.id}</span>`;
-  document.getElementById('popup-num').style.background = color;
-  document.getElementById('popup-title').textContent = pin.name;
-  document.getElementById('popup-time').textContent = `${pin.icon}  ${pin.time}`;
-  document.getElementById('popup-items').innerHTML = pin.items.map(i => `<li>${i}</li>`).join('');
-  document.getElementById('popup-gmap').href = gmapUrl(pin);
-  document.getElementById('popup-route').href = gmapRouteUrl(pin);
-  popup.classList.add('show');
-}
-
-function closePopup() {
-  document.getElementById('place-popup').classList.remove('show');
-  document.querySelectorAll('.place-item').forEach(el => el.classList.remove('active'));
-}
-
-// ── DAY 탭 필터 ──
-function filterDay(day, tabEl) {
-  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
-  tabEl.classList.add('active');
-  renderList(day);
-  closePopup();
-  document.querySelectorAll('.map-ctrl-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('btn-all').classList.add('active');
-}
-
-// ── 지도 컨트롤 ──
-function setActiveMapBtn(id) {
-  document.querySelectorAll('.map-ctrl-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById(id);
-  if (btn) btn.classList.add('active');
-}
-
-function showMapAll() {
-  setActiveMapBtn('btn-all');
-  const iframe = document.getElementById('map-iframe');
-  iframe.src = `https://maps.google.com/maps?q=오키나와&output=embed&hl=ko&z=9`;
-  const ph = document.getElementById('map-placeholder');
-  if (ph) ph.style.display = 'none';
-}
-
-function openDayRoute(day) {
-  setActiveMapBtn(`btn-d${day}`);
-  window.open(gmapDayRouteUrl(day), '_blank');
-}
-
-// ── 모바일 ──
+// ── 모바일 토글 ──
 function togglePanel() {
   const panel = document.getElementById('panel');
-  const btn = document.getElementById('toggle-panel');
+  const btn = document.getElementById('mob-toggle');
   panel.classList.toggle('hidden');
   btn.textContent = panel.classList.contains('hidden') ? '📋 일정 보기' : '🗺 지도 보기';
 }
+</script>
 
-// ── 초기화 ──
-renderList('all');
-renderRouteCards();
+<!-- Google Maps JavaScript API 로드 -->
+<script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2kBN056jzi5WdokyFKMXS5IZQEWO89Ug&language=ko&region=KR&callback=initMap">
 </script>
 </body>
 </html>
